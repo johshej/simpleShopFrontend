@@ -2,23 +2,30 @@
   <div class="currencyMenu">
     <ul id="currencyList">
       <li>
-        <a href="?currency=dkk">Danske kroner</a>
-        <a href="?currency=sek">Svenska kronor</a>
-        <a href="?currency=eur">Euro</a>
-        <a href="?currency=usd">Dollar</a>
+        <a class="dkk" href="?currency=dkk">Danske kroner</a>
+        <a class="sek" href="?currency=sek">Svenska kronor</a>
+        <a class="eur" href="?currency=eur">Euro</a>
+        <a class="usd" href="?currency=usd">Dollar</a>
       </li>
     </ul>
-    <div>cur {{ currency }}</div>
+    <div>Selected currency: {{ currency }}</div>
   </div>
 </template>
 
 <script>
 
 // Get and set curreny
-const params = (new URL(document.location)).searchParams
-const currency = params.get('currency')
+const defaultCurrency = 'dkk'
+const queryParameters = (new URL(document.location)).searchParams
+let currency = queryParameters.get('currency')
 if (currency) {
   localStorage.setItem('simpleShopCurrency', currency)
+}
+else if (localStorage.getItem('simpleShopCurrency')) {
+  currency = localStorage.getItem('simpleShopCurrency')
+}
+else {
+  currency = defaultCurrency
 }
 
 export default {
