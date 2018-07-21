@@ -1,17 +1,19 @@
 <template>
   <div id="app">
-    <img src="./assets/logo.png">
-    <HelloWorld/>
+    <CurrencyMenu/>
+    <ProductList/>
   </div>
 </template>
 
 <script>
-import HelloWorld from './components/LanguageMenu'
+import CurrencyMenu from './components/CurrencyMenu'
+import ProductList from './components/ProductList'
 
 export default {
   name: 'App',
   components: {
-    HelloWorld
+    CurrencyMenu,
+    ProductList
   }
 }
 </script>
