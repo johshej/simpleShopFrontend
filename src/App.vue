@@ -1,7 +1,7 @@
 <template>
   <div id="app">
-    <CurrencyMenu/>
-    <ProductList/>
+    <CurrencyMenu :currency="currency"/>
+    <ProductList :currency="currency"/>
   </div>
 </template>
 
@@ -9,8 +9,25 @@
 import CurrencyMenu from './components/CurrencyMenu'
 import ProductList from './components/ProductList'
 
+// Get and set currency
+const defaultCurrency = 'dkk'
+const queryParameters = (new URL(document.location)).searchParams
+let currency = queryParameters.get('currency')
+if (currency) {
+  localStorage.setItem('simpleShopCurrency', currency)
+} else if (localStorage.getItem('simpleShopCurrency')) {
+  currency = localStorage.getItem('simpleShopCurrency')
+} else {
+  currency = defaultCurrency
+}
+
 export default {
   name: 'App',
+  data: function () {
+    return {
+      currency: currency
+    }
+  },
   components: {
     CurrencyMenu,
     ProductList

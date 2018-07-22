@@ -3,19 +3,25 @@
     <h1>{{ title }}</h1>
     <ul>
       <li v-for="product in products" v-bind:key="product.id">
-        name: {{ product.name }}
+        <div class="name">{{ product.name }} passed value: {{ testValue }}</div>
+        <div v-bind:class="{ selectedCurrency: currency == 'dkk', 'price': true }">{{ product.price_dkk }}<span class="uppercase">{{ currency }}</span></div>
+        <div v-bind:class="{ selectedCurrency: currency == 'sek', 'price': true }">{{ product.price_sek }}<span class="uppercase">{{ currency }}</span></div>
+        <div v-bind:class="{ selectedCurrency: currency == 'eur', 'price': true }">{{ product.price_eur }}<span class="uppercase">{{ currency }}</span></div>
+        <div v-bind:class="{ selectedCurrency: currency == 'usd', 'price': true }">{{ product.price_usd }}<span class="uppercase">{{ currency }}</span></div>
       </li>
     </ul>
   </div>
 </template>
 
 <script>
+
 export default {
   name: 'Products',
+  props: ['currency'],
   data () {
     return {
       title: 'Produkter',
-      products: [ { id: 1, 'name': 'bar' } ]
+      products: [ ]
     }
   },
   created () {
@@ -46,9 +52,18 @@ ul {
 }
 li {
   display: inline-block;
-  margin: 0 10px;
+  margin: 10px;
 }
 a {
   color: #42b983;
+}
+.uppercase {
+  text-transform: uppercase;
+}
+.price {
+  display: none;
+}
+.selectedCurrency {
+  display: block;
 }
 </style>
